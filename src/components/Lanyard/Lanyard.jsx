@@ -7,7 +7,8 @@ import { BallCollider, CuboidCollider, Physics, RigidBody, useRopeJoint, useSphe
 import { MeshLineGeometry, MeshLineMaterial } from 'meshline';
 
 // replace with your own imports, see the usage snippet for details
-const cardGLB = "/portofolio/assets/card.glb";
+const cardGLB = "/portofolio/assets/card_v3.glb";
+const cardTextureImg = "/portofolio/assets/card_texture_front_hq.png";
 const lanyard = "/portofolio/assets/lanyard.png";
 
 import * as THREE from 'three';
@@ -20,7 +21,8 @@ export default function Lanyard({ position = [0, 0, 30], gravity = [0, -40, 0], 
     <div className="lanyard-wrapper">
       <Canvas
         camera={{ position: position, fov: fov }}
-        gl={{ alpha: transparent }}
+        dpr={[2, 4]}
+        gl={{ alpha: transparent, antialias: true, powerPreference: "high-performance" }}
         onCreated={({ gl }) => gl.setClearColor(new THREE.Color(0x000000), transparent ? 0 : 1)}
       >
         <ambientLight intensity={Math.PI} />
@@ -42,6 +44,12 @@ function Band({ maxSpeed = 50, minSpeed = 0 }) {
   const vec = new THREE.Vector3(), ang = new THREE.Vector3(), rot = new THREE.Vector3(), dir = new THREE.Vector3();
   const segmentProps = { type: 'dynamic', canSleep: true, colliders: false, angularDamping: 4, linearDamping: 4 };
   const { nodes, materials } = useGLTF(cardGLB);
+  if (materials?.base?.map) {
+    materials.base.map.generateMipmaps = true;
+    materials.base.map.minFilter = THREE.LinearMipmapLinearFilter;
+    materials.base.map.magFilter = THREE.LinearFilter;
+    materials.base.map.anisotropy = 16;
+  }
   const texture = useTexture(lanyard);
   const [curve] = useState(() => new THREE.CatmullRomCurve3([new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3()]));
   const [dragged, drag] = useState(false);
@@ -54,6 +62,17 @@ function Band({ maxSpeed = 50, minSpeed = 0 }) {
   useRopeJoint(j1, j2, [[0, 0, 0], [0, 0, 0], 1]);
   useRopeJoint(j2, j3, [[0, 0, 0], [0, 0, 0], 1]);
   useSphericalJoint(j3, card, [[0, 0, 0], [0, 1.50, 0]]);
+
+  useEffect(() => {
+    if (materials?.base?.map) {
+      materials.base.map.generateMipmaps = true;
+      materials.base.map.minFilter = THREE.LinearMipmapLinearFilter;
+      materials.base.map.magFilter = THREE.LinearFilter;
+      materials.base.map.anisotropy = 16;
+      materials.base.map.colorSpace = THREE.SRGBColorSpace;
+      materials.base.map.needsUpdate = true;
+    }
+  }, [materials]);
 
   useEffect(() => {
     if (hovered) {
@@ -123,7 +142,14 @@ function Band({ maxSpeed = 50, minSpeed = 0 }) {
             onPointerUp={(e) => (e.target.releasePointerCapture(e.pointerId), drag(false))}
             onPointerDown={(e) => (e.target.setPointerCapture(e.pointerId), drag(new THREE.Vector3().copy(e.point).sub(vec.copy(card.current.translation()))))}>
             <mesh geometry={nodes.card.geometry}>
-              <meshPhysicalMaterial map={materials.base.map} map-anisotropy={16} clearcoat={1} clearcoatRoughness={0.15} roughness={0.9} metalness={0.8} />
+              <meshPhysicalMaterial
+                map={materials.base.map}
+                map-anisotropy={16}
+                clearcoat={1}
+                clearcoatRoughness={0.1}
+                roughness={0.15}
+                metalness={0.0}
+              />
             </mesh>
             <mesh geometry={nodes.clip.geometry} material={materials.metal} material-roughness={0.3} />
             <mesh geometry={nodes.clamp.geometry} material={materials.metal} />

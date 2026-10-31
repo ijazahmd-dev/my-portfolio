@@ -9,3 +9,8 @@
   transform: scale(1);
   transform-origin: center;
 }
+
+.lanyard-wrapper canvas {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}

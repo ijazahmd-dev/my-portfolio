@@ -185,7 +185,7 @@
   width: 100%;
   position: absolute;
   left: 50%;
-  transform: translateX(-50%) scale(1);
+  transform: translateX(-56%) scale(1);
   bottom: 2px;
   opacity: calc(1.75 - var(--pointer-from-center));
 }

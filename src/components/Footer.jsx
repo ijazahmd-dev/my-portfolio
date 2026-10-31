@@ -1,12 +1,14 @@
 import "remixicon/fonts/remixicon.css";
 import Dock from "./Dock/Dock";
-import { VscHome, VscArchive, VscAccount } from "react-icons/vsc";
+import { VscHome, VscArchive, VscAccount, VscTools, VscMail } from "react-icons/vsc";
 
 const Footer = () => {
   const items = [
     { icon: <VscHome size={18} />, label: "Home", onClick: () => document.getElementById("home")?.scrollIntoView({ behavior: "smooth" }) },
     { icon: <VscAccount size={18} />, label: "About Me", onClick: () => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" }) },
+    { icon: <VscTools size={18} />, label: "Skills", onClick: () => document.getElementById("skills")?.scrollIntoView({ behavior: "smooth" }) },
     { icon: <VscArchive size={18} />, label: "Project", onClick: () => document.getElementById("project")?.scrollIntoView({ behavior: "smooth" }) },
+    { icon: <VscMail size={18} />, label: "Contact", onClick: () => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }) },
   ];
 
   return (
@@ -21,9 +23,8 @@ const Footer = () => {
 
         {/* Ikon Sosmed - di tengah di mobile */}
         <div className="flex gap-3 order-2 md:order-none">
-          <a href="https://github.com/rissss21"><i className="ri-github-fill ri-2x"></i></a>
-          <a href="https://www.instagram.com/farisedrikprayoga/"><i className="ri-instagram-fill ri-2x"></i></a>
-          <a href="https://www.youtube.com/@FarisEdrikPrayoga"><i className="ri-youtube-fill ri-2x"></i></a>
+          <a href="https://github.com/ijazahmd-dev" target="_blank" rel="noopener noreferrer" title="GitHub"><i className="ri-github-fill ri-2x"></i></a>
+          <a href="mailto:ijazahmed5432100@gmail.com" title="Email"><i className="ri-mail-fill ri-2x"></i></a>
         </div>
 
         {/* Dock - paling bawah di mobile */}
