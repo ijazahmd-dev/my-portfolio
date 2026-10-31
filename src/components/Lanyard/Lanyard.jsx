@@ -7,18 +7,44 @@ import { BallCollider, CuboidCollider, Physics, RigidBody, useRopeJoint, useSphe
 import { MeshLineGeometry, MeshLineMaterial } from 'meshline';
 
 // replace with your own imports, see the usage snippet for details
-const cardGLB = "/portofolio/assets/card_v3.glb";
-const cardTextureImg = "/portofolio/assets/card_texture_front_hq.png";
-const lanyard = "/portofolio/assets/lanyard.png";
+const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const cardGLB = `${baseUrl}assets/card_v3.glb`;
+const cardTextureImg = `${baseUrl}assets/card_texture_front_hq.png`;
+const lanyard = `${baseUrl}assets/lanyard.png`;
 
 import * as THREE from 'three';
+import React, { Component } from 'react';
 import './Lanyard.css';
 
 extend({ MeshLineGeometry, MeshLineMaterial });
 
+class LanyardErrorBoundary extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+  componentDidCatch(error) {
+    console.error("Lanyard 3D Error:", error);
+  }
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="flex items-center justify-center p-6 bg-zinc-900/50 rounded-2xl border border-zinc-800 text-zinc-500 text-sm">
+          3D interactive card unavailable on this device
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+
 export default function Lanyard({ position = [0, 0, 30], gravity = [0, -40, 0], fov = 20, transparent = true }) {
   return (
-    <div className="lanyard-wrapper">
+    <LanyardErrorBoundary>
+      <div className="lanyard-wrapper">
       <Canvas
         camera={{ position: position, fov: fov }}
         dpr={[2, 4]}
@@ -36,7 +62,8 @@ export default function Lanyard({ position = [0, 0, 30], gravity = [0, -40, 0], 
           <Lightformer intensity={10} color="white" position={[-10, 0, 14]} rotation={[0, Math.PI / 2, Math.PI / 3]} scale={[100, 10, 1]} />
         </Environment>
       </Canvas>
-    </div>
+      </div>
+    </LanyardErrorBoundary>
   );
 }
 function Band({ maxSpeed = 50, minSpeed = 0 }) {

@@ -10,14 +10,14 @@ const PreLoader = () => {
 
   useEffect(() => {
     if (countDone) {
-      // Fade teks
-      const fadeTextTimer = setTimeout(() => setFadeText(true), 3000)
+      // Fade text quickly
+      const fadeTextTimer = setTimeout(() => setFadeText(true), 150)
 
-      // Fade seluruh screen
-      const fadeScreenTimer = setTimeout(() => setFadeScreen(true), 2000)
+      // Fade entire screen smoothly
+      const fadeScreenTimer = setTimeout(() => setFadeScreen(true), 300)
 
-      // Unmount preloader setelah animasi fade selesai
-      const hideTimer = setTimeout(() => setLoading(false), 3000)
+      // Unmount preloader after fade out is done
+      const hideTimer = setTimeout(() => setLoading(false), 1000)
 
       return () => {
         clearTimeout(fadeTextTimer)
@@ -30,8 +30,8 @@ const PreLoader = () => {
   return (
     loading && (
       <div
-        className={`w-screen h-screen fixed flex items-center justify-center bg-black z-[10000] overflow-hidden transition-opacity duration-1000 ${
-          fadeScreen ? "opacity-0" : "opacity-100"
+        className={`w-screen h-screen fixed inset-0 flex items-center justify-center bg-black z-[10000] overflow-hidden transition-opacity duration-700 ${
+          fadeScreen ? "opacity-0 pointer-events-none" : "opacity-100"
         }`}
       >
         <Aurora

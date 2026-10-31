@@ -34,6 +34,8 @@ export default function ChatRoom() {
   const [isSending, setIsSending] = useState(false);
   const [authError, setAuthError] = useState("");
   const messagesEndRef = useRef(null);
+  const chatBoxRef = useRef(null);
+  const isInitialLoad = useRef(true);
 
   // Load guest user from localStorage
   useEffect(() => {
@@ -95,9 +97,18 @@ export default function ChatRoom() {
     }
   }, []);
 
-  // Auto-scroll to bottom on new messages
+  // Auto-scroll inside chatbox container only (prevents scrolling entire webpage to bottom)
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (!chatBoxRef.current) return;
+    if (isInitialLoad.current) {
+      chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
+      isInitialLoad.current = false;
+    } else {
+      chatBoxRef.current.scrollTo({
+        top: chatBoxRef.current.scrollHeight,
+        behavior: "smooth"
+      });
+    }
   }, [remoteMessages, localMessages]);
 
   const activeUser = user
@@ -312,7 +323,7 @@ export default function ChatRoom() {
       )}
 
       {/* Messages Scroll Area */}
-      <div className="flex-1 overflow-y-auto pr-1 space-y-3.5 rounded-xl mb-4 custom-scrollbar">
+      <div ref={chatBoxRef} className="flex-1 overflow-y-auto pr-1 space-y-3.5 rounded-xl mb-4 custom-scrollbar">
         {allMessages.map((msg) => {
           const isCurrentUser = activeUser && msg.uid === activeUser.uid;
           const isHost = msg.isHost;
