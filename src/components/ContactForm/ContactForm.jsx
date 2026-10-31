@@ -62,7 +62,7 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="bg-zinc-900/90 border border-zinc-700/80 p-6 rounded-2xl shadow-xl backdrop-blur-md flex flex-col justify-between h-[560px] w-full">
+    <div className="bg-zinc-900/90 border border-zinc-700/80 p-4 sm:p-6 rounded-2xl shadow-xl backdrop-blur-md flex flex-col justify-between min-h-[500px] lg:h-[560px] w-full">
       <div className="flex items-center justify-between pb-4 mb-2 border-b border-zinc-700/80">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-full bg-violet-600/30 border border-violet-500/40 flex items-center justify-center text-xl">

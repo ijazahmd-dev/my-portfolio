@@ -268,7 +268,7 @@ export default function ChatRoom() {
   };
 
   return (
-    <div className="bg-zinc-900/90 border border-zinc-700/80 p-6 rounded-2xl shadow-xl backdrop-blur-md max-w-xl mx-auto flex flex-col h-[560px]">
+    <div className="bg-zinc-900/90 border border-zinc-700/80 p-4 sm:p-6 rounded-2xl shadow-xl backdrop-blur-md w-full flex flex-col min-h-[500px] lg:h-[560px]">
       {/* Header */}
       <div className="flex items-center justify-between pb-4 mb-4 border-b border-zinc-700/80">
         <div className="flex items-center gap-3">
