@@ -37,6 +37,8 @@ const Footer = () => {
         {/* Social Links */}
         <div className="flex gap-4 order-2 md:order-none text-zinc-400">
           <a href="https://github.com/ijazahmd-dev" target="_blank" rel="noopener noreferrer" title="GitHub" className="hover:text-white transition"><i className="ri-github-fill ri-xl"></i></a>
+          <a href="https://www.linkedin.com/in/ijaz-ahmed5432100/" target="_blank" rel="noopener noreferrer" title="LinkedIn" className="hover:text-white transition"><i className="ri-linkedin-fill ri-xl"></i></a>
+          <a href="https://www.instagram.com/ijaz.zz_" target="_blank" rel="noopener noreferrer" title="Instagram" className="hover:text-white transition"><i className="ri-instagram-fill ri-xl"></i></a>
           <a href="mailto:ijazahmed5432100@gmail.com" title="Email" className="hover:text-white transition"><i className="ri-mail-fill ri-xl"></i></a>
         </div>
 
