@@ -51,11 +51,11 @@ const Navbar = ({ hidden = false }) => {
             onClick={(e) => handleLinkClick(e, "#home")}
             className="flex items-center gap-2 group cursor-pointer"
           >
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-600 to-indigo-600 flex items-center justify-center font-bold text-white text-base shadow-md shadow-violet-500/30">
+            <div className="w-8 h-8 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center font-bold text-white text-base shadow-sm group-hover:bg-white/20 transition-colors">
               I
             </div>
             <span className="text-xl sm:text-2xl font-bold text-white tracking-tight">
-              Ijaz<span className="text-violet-500">.</span>
+              Ijaz<span className="text-white/60">.</span>
             </span>
           </a>
 
@@ -78,7 +78,7 @@ const Navbar = ({ hidden = false }) => {
             <a
               href="./assets/Ijaz_Ahmed_Resume.pdf"
               download="Ijaz_Ahmed_Resume.pdf"
-              className="hidden sm:inline-flex items-center gap-2 text-xs sm:text-sm font-semibold bg-violet-600/20 hover:bg-violet-600 text-violet-300 hover:text-white border border-violet-500/30 hover:border-violet-500 px-4 py-2 rounded-full transition-all duration-200"
+              className="hidden sm:inline-flex items-center gap-2 text-xs sm:text-sm font-semibold bg-white/10 hover:bg-white/20 text-white border border-white/20 hover:border-white/40 px-4 py-2 rounded-full transition-all duration-200 shadow-sm"
             >
               <span>Resume</span>
               <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -126,7 +126,7 @@ const Navbar = ({ hidden = false }) => {
                 <a
                   href="./assets/Ijaz_Ahmed_Resume.pdf"
                   download="Ijaz_Ahmed_Resume.pdf"
-                  className="w-full text-center py-2.5 rounded-xl bg-violet-600 text-white font-semibold text-sm shadow-md"
+                  className="w-full text-center py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold text-sm border border-white/20 shadow-md transition"
                 >
                   Download Resume
                 </a>

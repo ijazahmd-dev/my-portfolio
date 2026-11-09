@@ -29,7 +29,7 @@ const Footer = () => {
         {/* Brand / Name */}
         <div className="flex items-center gap-2 order-1 md:order-none text-center md:text-left">
           <span className="text-xl font-bold text-white tracking-tight">
-            Ijaz Ahmed<span className="text-violet-500">.</span>
+            Ijaz Ahmed<span className="text-white/60">.</span>
           </span>
           <span className="text-xs text-zinc-500 font-medium">© {new Date().getFullYear()}</span>
         </div>
